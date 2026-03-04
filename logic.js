@@ -1,19 +1,26 @@
 
 window.addEventListener("keydown",(e)=>{
-    if(e.key==="Enter")
-        {
-            update();
-            location.reload();
-           
-        }
-})
+    if(e.key==="Enter"){
+        update();
+    }
+});
 
 function update(){
-    location.reload();
     let mesg = messege.value;
-    messege.value= "";
-fetch(`msg.php?msg=${mesg}`)
+    messege.value = "";
+
+    fetch(`msg.php?msg=${mesg}`)
+        .then(() => loadMessages());
 }
+
+function loadMessages(){
+    fetch("dr.php")
+    .then(r => r.text())
+    .then(d => {
+        msgdiv.innerHTML = d;
+    });
+}
+setInterval(loadMessages,1000);
 
 
 
@@ -32,6 +39,14 @@ fetch("dr.php").then((r)=>{
        
     }
 )
+function loadMessages(){
+    fetch("dr.php")
+    .then(r => r.text())
+    .then(d => {
+        msgdiv.innerHTML = d;
+    });
+}
+setInterval(loadMessages,1000);
 let inputmsg = document.querySelector("#messege")
 //  emoji button
 let emojidiv = document.querySelector(".emojilist");
