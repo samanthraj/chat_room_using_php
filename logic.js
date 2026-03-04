@@ -13,14 +13,7 @@ function update(){
         .then(() => loadMessages());
 }
 
-function loadMessages(){
-    fetch("dr.php")
-    .then(r => r.text())
-    .then(d => {
-        msgdiv.innerHTML = d;
-    });
-}
-setInterval(loadMessages,1000);
+
 
 
 
